@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* All the routes are affected with the RouteServiceProvider. Rules defined in it:
+ *
+ * · $id -> Only accepts digits [0-9]+ // [\d+]
+ *
+ *
+ */
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('apps', 'AppController@resume');
+Route::get('app/new', 'AppController@create');
+Route::get('app/{id}', 'AppController@details');

@@ -1,10 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Commons\UserContract;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        UserContract::NAME, UserContract::EMAIL, UserContract::PASSWORD,
     ];
 
     /**
@@ -25,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        UserContract::PASSWORD, 'remember_token',
     ];
 
     /**
@@ -34,6 +35,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        UserContract::EMAIL_VERIFIED => 'datetime',
+        UserContract::IS_ADMIN       => 'boolean'
     ];
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }
